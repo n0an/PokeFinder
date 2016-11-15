@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
     var geoFire: GeoFire!
+    var geoFireRef: FIRDatabaseReference!
     
     let locationManager = CLLocationManager()
     
@@ -24,6 +26,9 @@ class ViewController: UIViewController {
         mapView.delegate = self
         mapView.userTrackingMode = MKUserTrackingMode.follow
         
+        geoFireRef = FIRDatabase.database().reference()
+        
+        geoFire = GeoFire(firebaseRef: geoFireRef)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,8 +53,30 @@ class ViewController: UIViewController {
     }
 
     
+    func createSightin(forLocation location: CLLocation, withPokemon pokeId: Int) {
+        geoFire.setLocation(location, forKey: "\(pokeId)")
+    }
+    
+    func showSightingsOnMap(location: CLLocation) {
+        let circleQuery = geoFire.query(at: location, withRadius: 2.5)
+        _ = circleQuery?.observe(.keyEntered, with: { (key, location) in
+            
+            if let key = key, let location = location {
+                let anno = PokeAnnotation(coordinate: location.coordinate, pokemonNumber: Int(key)!)
+                self.mapView.addAnnotation(anno)
+            }
+            
+        })
+    }
+    
+    
     @IBAction func spotRandomPokemon(_ sender: Any) {
         
+        let location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        
+        let rand = arc4random_uniform(151) + 1
+        
+        createSightin(forLocation: location, withPokemon: Int(rand))
         
     }
     
