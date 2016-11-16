@@ -24,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		18200B331DDB9537000B0075 /* PokeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeAnnotation.swift; sourceTree = "<group>"; };
+		18200B351DDCF1FF000B0075 /* PokeFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PokeFinder.entitlements; sourceTree = "<group>"; };
 		188413441DDB81BC004A293A /* PokeFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		188413471DDB81BC004A293A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		188413491DDB81BC004A293A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 		188413461DDB81BC004A293A /* PokeFinder */ = {
 			isa = PBXGroup;
 			children = (
+				18200B351DDCF1FF000B0075 /* PokeFinder.entitlements */,
 				18200B321DDB9520000B0075 /* Model */,
 				18200B311DDB951C000B0075 /* View */,
 				18200B301DDB9515000B0075 /* Controller */,
@@ -216,6 +218,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 358V8FBM3U;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
